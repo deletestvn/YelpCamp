@@ -23,11 +23,16 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-app.get('/createcampground', async (req, res) => {
-    const camp = new Campground({ title: 'Stupid Yard', price: '$110', description: 'For studpid junkies only', location: 'Toronto' });
-    await camp.save();
-    res.send(camp);
-})
+app.get('/campgrounds', async (req, res) => {
+    const campgrounds = await Campground.find({});
+    res.render('campgrounds/index', { campgrounds });
+
+});
+
+app.get('/campgrounds/:id', async (req, res) => {
+    const campground = await Campground.findById(req.params.id);
+    res.render('campgrounds/show', { campground });
+});
 
 app.listen(3000, () => {
     console.log('Serving on port 3000!');
