@@ -24,11 +24,13 @@ const seedDB = async () => {
     await Campground.deleteMany({});
     for (let i = 0; i < 50; i++) {
         let randomName = randomSeed(helper.names);
+        let randomImage = 'https://source.unsplash.com/collection/1673600';
         let randomDescription = randomSeed(helper.descriptions);
         let randomCity = randomSeed(helper.cities);
         let randomPrice = 100 + Math.floor(Math.random() * 400);
         let newCamp = new Campground({
             title: randomName,
+            image: randomImage,
             price: randomPrice,
             description: randomDescription,
             location: randomCity
